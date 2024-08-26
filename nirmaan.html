@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/nirmaan_logo.png">
+
+</head>
+<body>
+
+<!--form-->
+<form>
+  <!--nirmaan logo-->
+  <div>
+    <img src="images/nirmaan_logo.png" alt="Nirmaan Logo" class="logo">
+  </div>
+
+  <h1>Applying Form</h1>
+
+  <!--photo-->
+  <label for="file">Choose your photo:</label>
+  <input type="file" name="file" id="file" accept="image/jpeg, image/png" required>
+
+  <!--first name-->
+  <label for="firstname">First name:</label>
+  <input type="text" id="firstname" name="firstname" required>
+
+  <!--last name-->
+  <label for="lastname">Last name:</label>
+  <input type="text" id="lastname" name="lastname">
+
+  <!--gender-->
+  <label for="gender" id="gender" class="gender-label">Gender:</label><br>
+  <input type="radio" id="male" name="gender" value="male"> Male
+  <input type="radio" id="female" name="gender" value="female"> Female
+  <input type="radio" id="other" name="gender" value="other"> Other<br><br>
+
+  <!--birthday-->
+  <label for="birthday">Birthday:</label>
+  <input type="date" id="birthday" name="birthday" required>
+
+  <!--email-->
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" placeholder="nirmaan@gmail.com" required>
+
+  <!--phone number-->
+  <label for="phone">Phone Number:</label>
+  <input type="tel" id="phone" name="phone" minlength="10" placeholder="1234567890" required>
+
+  <!--qualification-->
+  <label for="qualification">Qualification:</label>
+  <input type="text" id="qualification" name="qualifications" placeholder="Computer Science">
+<!---->
+  <!--started day-->
+  <label for="started">Started:</label>
+  <input type="date" id="started" name="started" required>
+  <label for="duration">Duration by month:</label>
+  <input type="number" id="duration" name="duration" value="1" min="1" max="99" required>
+<!---->
+  <!--department-->
+  <label for="department">Department of:</label>
+  <select id="department" name="department" required>
+    <option selected disabled>Select a department</option>
+    <option>Tech</option>
+    <option>Non-tech</option>
+    <option>Comm</option>
+    <option>HR</option>
+    <option>ISR</option>
+    <option>Volunteering</option>
+    <option>SWASHA</option>
+    <option>Partnership</option>
+  </select>
+<!---->
+  <br><br>
+  <button type="submit">Submit</button> <!--submit button-->
+</form>
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Collect form data
+    const formData = {
+      firstname: document.getElementById('firstname').value,
+      lastname: document.getElementById('lastname').value,
+      gender: document.querySelector('input[name="gender"]:checked').value,
+      birthday: document.getElementById('birthday').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      qualification: document.getElementById('qualification').value,
+      started: document.getElementById('started').value,
+      duration: document.getElementById('duration').value,
+      department: document.getElementById('department').value,
+      image: ''
+    };
+
+    // Handle image upload preview
+    const fileInput = document.getElementById('file');
+    if (fileInput.files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        formData.image = e.target.result; // Store base64 image data
+        saveAndRedirect();
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      saveAndRedirect();
+    }
+
+    // Save data to sessionStorage and redirect to preview page
+    function saveAndRedirect() {
+      sessionStorage.setItem('formData', JSON.stringify(formData));
+      window.location.href = 'preview.html';
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
