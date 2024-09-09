@@ -15,7 +15,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 10px 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.51);
     z-index: 1000;
@@ -60,4 +60,21 @@ header img {
 
 .data-container p {
     margin: 10px 0;
+}
+
+.edit-btn {
+    font-family: cursive, fantasy;
+    position: absolute;
+    bottom: 40px;
+    right: 70px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #45a049; /* Darken the button color on hover */
 }
